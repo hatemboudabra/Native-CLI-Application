@@ -52,4 +52,9 @@ public class MyCustomCommand {
                 .map(Produit::toString)
                 .collect(Collectors.joining("\n"));
     }
+    @ShellMethod(key = "deleteById")
+    public String delete(@ShellOption (defaultValue = "1") Long id){
+        produitRepo.deleteById(id);
+        return "Deleted produit";
+    }
 }
