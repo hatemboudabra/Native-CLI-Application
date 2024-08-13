@@ -31,5 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+# Ignorer les fichiers de logs
 native_CLI_Application.log
 spring-shell.log
