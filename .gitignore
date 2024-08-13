@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+native_CLI_Application.log
+spring-shell.log
