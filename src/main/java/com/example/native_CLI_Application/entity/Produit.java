@@ -1,6 +1,7 @@
 package com.example.native_CLI_Application.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -17,4 +18,6 @@ public class Produit {
     private Long id;
     private String name;
     private Double price;
+    @Enumerated
+    private Categorie categorie;
 }

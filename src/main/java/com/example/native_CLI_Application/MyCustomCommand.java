@@ -1,4 +1,5 @@
 package com.example.native_CLI_Application;
+import com.example.native_CLI_Application.entity.Categorie;
 import com.example.native_CLI_Application.entity.Produit;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -30,9 +31,9 @@ public class MyCustomCommand {
     }
     @ShellMethod(key = "add")
     public String add(@ShellOption(defaultValue = "unknown") String name,
-                      @ShellOption(defaultValue = "0") double price){
+                      @ShellOption(defaultValue = "0") double price, @ShellOption(defaultValue = "unknown")Categorie categorie){
         Produit produit = produitRepo.save(Produit.builder()
-                .name(name).price(price)
+                .name(name).price(price) .categorie(categorie)
                 .build());
         return produit.toString();
     }
@@ -56,5 +57,15 @@ public class MyCustomCommand {
     public String delete(@ShellOption (defaultValue = "1") Long id){
         produitRepo.deleteById(id);
         return "Deleted produit";
+    }
+    @ShellMethod(key = "findcat")
+    public List<Produit> findProductsByCategory(String categorieName) {
+        Categorie categorie;
+        try {
+            categorie = Categorie.valueOf(categorieName.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid category: " + categorieName);
+        }
+        return produitRepo.findByCategorie(categorie);
     }
 }
